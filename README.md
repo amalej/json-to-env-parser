@@ -1,4 +1,4 @@
-# JSON to ENV parser
+# JSON to ENV parser [![github](https://img.shields.io/badge/GitHub-repository-blue)](https://github.com/amalej/json-to-env-parser) [![npm](https://img.shields.io/npm/v/json-to-env-parser)](https://www.npmjs.com/package/json-to-env-parser) [![npm](https://img.shields.io/npm/dt/json-to-env-parser)](https://www.npmjs.com/package/json-to-env-parser?activeTab=versions)
 
 A library to convert JSON objects/files into ENV object/files
 
