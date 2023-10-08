@@ -1,0 +1,24 @@
+{
+    "project_id": "this-is-a-project-id",
+    "item": [
+        "item 0",
+        "item 1",
+        "item 2"
+    ],
+    "app_id": "fake-app-id",
+    "tokens": [
+        "abc-token",
+        "def-token",
+        "ghi-token"
+    ],
+    "users": [
+        {
+            "name": "Uno",
+            "email": "uno@gmail.com"
+        },
+        {
+            "name": "Dos",
+            "email": "dos@gmail.com"
+        }
+    ]
+}
