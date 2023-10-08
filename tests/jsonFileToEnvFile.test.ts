@@ -1,3 +1,7 @@
+describe("Pass", () => {
+  it("Should pass", () => {});
+});
+
 // import path from "path";
 // import { jsonFileToEnvFile } from "../src";
 // import { config } from "dotenv";
