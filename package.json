@@ -4,6 +4,10 @@
   "description": "Parses JSON object to env format",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amalej/json-to-env-parser"
+  },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
