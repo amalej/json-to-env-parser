@@ -9,11 +9,16 @@ jobs:
     name: 🚀 release
     runs-on: ubuntu-latest
     steps:
-      - name: 📚 checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      - name: 🟢 node
+      - name: Install dependencies
         run: npm install
-      - name: 🚀 publish
-        run: npm publish --access public
+      - name: Build
+        run: npm run build
+      - name: Publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          NPM_REGISTRY: ${{secrets.NPM_REGISTRY}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: |
+          echo "//${NPM_REGISTRY}/:_authToken=${NPM_TOKEN}"  > .npmrc
+          npm publish
