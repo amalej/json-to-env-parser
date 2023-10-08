@@ -1,0 +1,9 @@
+on: [release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Perform the tests
+    steps:
+      - name: Test logs
+        run: echo This is from the release
