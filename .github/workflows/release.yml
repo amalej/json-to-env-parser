@@ -1,4 +1,4 @@
-name: "🚀 release"
+name: "🚀 Release"
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    name: 🚀 release
+    name: 🚀 Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
