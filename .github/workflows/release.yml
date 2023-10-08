@@ -1,23 +1,23 @@
+name: "🚀 release"
+
 on:
   release:
     types: [published]
-    branches:
-      - master
 
 jobs:
-  build:
+  release:
+    name: 🚀 release
     runs-on: ubuntu-latest
-    name: Release
     steps:
-      - uses: actions/checkout@v3
+      - name: 📚 checkout
+        uses: actions/checkout@v3
+      - name: 🟢 node
+        uses: actions/setup-node@v1.4.2
         with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
-      - name: Install modules
-        run: npm install
-      - name: Test logs
-        run: echo This is from the release
-      - name: Test logs
-        run: npm publish
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+      - name: 🚀 publish
+        run: npm publish --access public
+        working-directory: my-package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

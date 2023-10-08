@@ -23,6 +23,9 @@
     "config",
     "environment variables"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "Alejandro Marco Alejandre",
   "license": "ISC",
   "devDependencies": {
