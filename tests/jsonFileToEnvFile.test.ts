@@ -5,8 +5,11 @@ import { readdir, unlink } from "fs/promises";
 
 describe("Test reading JSON files", () => {
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.0");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "0.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.0");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "0.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -14,8 +17,11 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.1");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "1.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.1");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "1.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -25,8 +31,11 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.2");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "2.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.2");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "2.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -37,8 +46,11 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.3");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "3.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.3");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "3.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -50,8 +62,11 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.4");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "4.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.4");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "4.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -66,8 +81,11 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join("tests", "jsonFileToEnvFiles", ".env.5");
-    await jsonFileToEnvFile(path.join("tests", "jsonFiles", "5.json"), outDir);
+    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.5");
+    await jsonFileToEnvFile(
+      path.join(__dirname, "jsonFiles", "5.json"),
+      outDir
+    );
 
     config({ path: outDir, override: true });
 
@@ -86,7 +104,7 @@ describe("Test reading JSON files", () => {
   });
 
   afterAll(async () => {
-    const dirPath = path.join("tests", "jsonFileToEnvFiles");
+    const dirPath = path.join(__dirname, "jsonFileToEnvFiles");
     try {
       const files = await readdir(dirPath);
 
