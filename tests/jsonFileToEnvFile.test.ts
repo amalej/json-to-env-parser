@@ -5,25 +5,25 @@ import { rmdir } from "fs/promises";
 
 describe("Test reading JSON files", () => {
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.0");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.0");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "0.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.1");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.1");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "1.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
     expect(process.env.API_KEY).toEqual("fake-api-key");
@@ -31,13 +31,13 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.2");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.2");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "2.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
     expect(process.env.ITEM_0).toEqual("item 0");
@@ -46,13 +46,13 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.3");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.3");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "3.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
     expect(process.env.ITEM_0).toEqual("item 0");
@@ -62,13 +62,13 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.4");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.4");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "4.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
     expect(process.env.ITEM_0).toEqual("item 0");
@@ -81,13 +81,13 @@ describe("Test reading JSON files", () => {
   });
 
   it("Shoud parse the JSON file and output to env ENV file", async () => {
-    const outDir = path.join(__dirname, "jsonFileToEnvFiles", ".env.5");
+    const outFilePath = path.join(__dirname, "jsonFileToEnvFiles", ".env.5");
     await jsonFileToEnvFile(
       path.join(__dirname, "jsonFiles", "5.json"),
-      outDir
+      outFilePath
     );
 
-    config({ path: outDir, override: true });
+    config({ path: outFilePath, override: true });
 
     expect(process.env.PROJECT_ID).toEqual("this-is-a-project-id");
     expect(process.env.ITEM_0).toEqual("item 0");
