@@ -10,6 +10,15 @@ const simpleJsonEnvs = [
   },
   {
     json: {
+      appId: "fake-app-id",
+      projectId: "this-is-a-project-id",
+    },
+    env: `APP_ID=fake-app-id\nPROJECT_ID=this-is-a-project-id\n`,
+    envLower: `app_id=fake-app-id\nproject_id=this-is-a-project-id\n`,
+    envJoinCamelCase: `APPID=fake-app-id\nPROJECTID=this-is-a-project-id\n`,
+  },
+  {
+    json: {
       api_key: "fake-api-key",
     },
     env: `API_KEY=fake-api-key\n`,
@@ -41,6 +50,15 @@ const jsonWithArrEnvs = [
     },
     env: `PROJECT_ID=this-is-a-project-id\nITEM_0=item 0\nITEM_1=item 1\nITEM_2=item 2\n`,
     envLower: `project_id=this-is-a-project-id\nitem_0=item 0\nitem_1=item 1\nitem_2=item 2\n`,
+  },
+  {
+    json: {
+      projectId: "this-is-a-project-id",
+      storedItem: ["item 0", "item 1", "item 2"],
+    },
+    env: `PROJECT_ID=this-is-a-project-id\nSTORED_ITEM_0=item 0\nSTORED_ITEM_1=item 1\nSTORED_ITEM_2=item 2\n`,
+    envLower: `project_id=this-is-a-project-id\nstored_item_0=item 0\nstored_item_1=item 1\nstored_item_2=item 2\n`,
+    envJoinCamelCase: `PROJECTID=this-is-a-project-id\nSTOREDITEM_0=item 0\nSTOREDITEM_1=item 1\nSTOREDITEM_2=item 2\n`,
   },
   {
     json: {
@@ -134,9 +152,20 @@ describe("Convert simple JSON to ENV format", () => {
 describe("Convert simple JSON to lowercase ENV format", () => {
   for (let jsonEnv of simpleJsonEnvs) {
     it("Should correctly convert simple json", () => {
-      const env = jsonToEnv(jsonEnv.json, false);
+      const env = jsonToEnv(jsonEnv.json, { capitalize: false });
       expect(env).toEqual(jsonEnv.envLower);
     });
+  }
+});
+
+describe("Convert simple JSON to joined camel case ENV format", () => {
+  for (let jsonEnv of simpleJsonEnvs) {
+    if (jsonEnv.envJoinCamelCase !== undefined) {
+      it("Should correctly convert simple json", () => {
+        const env = jsonToEnv(jsonEnv.json, { splitCamelCase: false });
+        expect(env).toEqual(jsonEnv.envJoinCamelCase);
+      });
+    }
   }
 });
 
@@ -152,9 +181,20 @@ describe("Convert JSON with arrays to ENV format", () => {
 describe("Convert JSON with arrays to lowercase ENV format", () => {
   for (let jsonEnv of jsonWithArrEnvs) {
     it("Should correctly convert normal json with arrays", () => {
-      const env = jsonToEnv(jsonEnv.json, false);
+      const env = jsonToEnv(jsonEnv.json, { capitalize: false });
       expect(env).toEqual(jsonEnv.envLower);
     });
+  }
+});
+
+describe("Convert JSON with arrays to joined camel case ENV format", () => {
+  for (let jsonEnv of jsonWithArrEnvs) {
+    if (jsonEnv.envJoinCamelCase !== undefined) {
+      it("Should correctly convert normal json with arrays", () => {
+        const env = jsonToEnv(jsonEnv.json, { splitCamelCase: false });
+        expect(env).toEqual(jsonEnv.envJoinCamelCase);
+      });
+    }
   }
 });
 

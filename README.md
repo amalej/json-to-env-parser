@@ -4,6 +4,26 @@ A library to convert JSON objects/files into ENV object/files
 
 ## Sample
 
+```ts
+import { jsonToEnv } from "json-to-env-parser";
+
+const envStr = jsonToEnv({
+  appId: "1:123456789012:5d5632b33bdaed6bc78d82",
+  projectId: "some-project-id",
+  messagingSenderId: "123456789012",
+});
+
+console.log(envStr);
+```
+
+Outputs:
+
+```
+APP_ID=1:123456789012:5d5632b33bdaed6bc78d82
+PROJECT_ID=some-project-id
+MESSAGING_SENDER_ID=123456789012
+```
+
 ### Simple JSON
 
 JSON

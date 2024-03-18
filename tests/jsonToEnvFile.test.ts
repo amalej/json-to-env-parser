@@ -1,7 +1,7 @@
 import path from "path";
 import { jsonToEnvFile } from "../src";
 import { config } from "dotenv";
-import { readdir, unlink } from "fs/promises";
+import { rmdir } from "fs/promises";
 
 describe("Test reading JSON files", () => {
   it("Shoud parse the JSON file and output it in an env format", async () => {
@@ -136,13 +136,7 @@ describe("Test reading JSON files", () => {
   afterAll(async () => {
     const dirPath = path.join(__dirname, "jsonToEnvFiles");
     try {
-      const files = await readdir(dirPath);
-
-      const deleteFilePromises = files.map((file) =>
-        unlink(path.join(dirPath, file))
-      );
-
-      await Promise.all(deleteFilePromises);
+      await rmdir(dirPath, { recursive: true });
     } catch (err) {
       console.log(err);
     }

@@ -1,36 +1,74 @@
-import { readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { dirname } from "path";
 
+interface ParserOptions {
+  /**
+   * Capitalizes all characters. Converts `app_id` -> `APP_ID`.
+   */
+  capitalize?: boolean;
+  /**
+   * The parent key. If value is set to `REACT` and JSON is `{"id": "unique id"}`,
+   * then the ouput .env would be `REACT_ID=unique id`.
+   */
+  parentKey?: string;
+  /**
+   * Convert camel case strings into snake case. Converts `appId` -> `app_id`.
+   */
+  splitCamelCase?: boolean;
+}
+
+const DEFAULT_PARSER_OPTIONS = {
+  capitalize: true,
+  parentKey: "",
+  splitCamelCase: true,
+};
+
+/**
+ * Convert a JSON object to an .env formatted string.
+ * @param json The JSON object tot be converted.
+ * @param options Options during parsing.
+ * @returns env string
+ */
 export const jsonToEnv = (
   json: Object,
-  capitalize: boolean = true,
-  parentKey: string = ""
+  options: ParserOptions = DEFAULT_PARSER_OPTIONS
 ) => {
-  const _parentKey = parentKey === "" ? "" : `${parentKey}_`;
+  options.capitalize = options.capitalize ?? true;
+  options.parentKey = options.parentKey ?? "";
+  options.splitCamelCase = options.splitCamelCase ?? true;
+  const _parentKey = options.parentKey === "" ? "" : `${options.parentKey}_`;
   const keys = Object.keys(json);
   let env = "";
   for (let key of keys) {
+    const _key = options.splitCamelCase
+      ? key.replace(/[A-Z]/g, (letter) => `_${letter.toLocaleLowerCase()}`)
+      : key;
     if (Array.isArray(json[key])) {
       const arr: Array<any> = json[key];
       for (let index in arr) {
         if (typeof json[key][index] !== "object") {
-          const finalKey = capitalize
-            ? `${_parentKey}${key}_${index}`.toUpperCase()
-            : `${_parentKey}${key}_${index}`;
+          const finalKey = options.capitalize
+            ? `${_parentKey}${_key}_${index}`.toUpperCase()
+            : `${_parentKey}${_key}_${index}`;
           env += `${finalKey}=${json[key][index]}\n`;
         } else {
-          env += jsonToEnv(
-            json[key][index],
-            capitalize,
-            `${_parentKey}${key}_${index}`
-          );
+          env += jsonToEnv(json[key][index], {
+            capitalize: options.capitalize,
+            parentKey: `${_parentKey}${_key}_${index}`,
+            splitCamelCase: options.splitCamelCase,
+          });
         }
       }
     } else if (typeof json[key] === "object") {
-      env += jsonToEnv(json[key], capitalize, `${_parentKey}${key}`);
+      env += jsonToEnv(json[key], {
+        capitalize: options.capitalize,
+        parentKey: `${_parentKey}${_key}`,
+        splitCamelCase: options.splitCamelCase,
+      });
     } else {
-      const finalKey = capitalize
-        ? `${_parentKey}${key}`.toUpperCase()
-        : `${_parentKey}${key}`;
+      const finalKey = options.capitalize
+        ? `${_parentKey}${_key}`.toUpperCase()
+        : `${_parentKey}${_key}`;
       env += `${finalKey}=${json[key]}\n`;
     }
   }
@@ -40,30 +78,28 @@ export const jsonToEnv = (
 export const jsonToEnvFile = async (
   filePath: string,
   json: Object,
-  capitalize: boolean = true,
-  parentKey: string = ""
+  options: ParserOptions = DEFAULT_PARSER_OPTIONS
 ) => {
-  const env = jsonToEnv(json, capitalize, parentKey);
+  const env = jsonToEnv(json, options);
+  await mkdir(dirname(filePath), { recursive: true });
   await writeFile(filePath, env);
 };
 
 export const jsonFileToEnv = async (
   filePath: string,
-  capitalize: boolean = true,
-  parentKey: string = ""
+  options: ParserOptions = DEFAULT_PARSER_OPTIONS
 ) => {
   const buf = await readFile(filePath);
   const json = JSON.parse(buf.toString());
-  return jsonToEnv(json, capitalize, parentKey);
+  return jsonToEnv(json, options);
 };
 
 export const jsonFileToEnvFile = async (
   jsonFilePath: string,
   envFilePath: string,
-  capitalize: boolean = true,
-  parentKey: string = ""
+  options: ParserOptions = DEFAULT_PARSER_OPTIONS
 ) => {
   const buf = await readFile(jsonFilePath);
   const json = JSON.parse(buf.toString());
-  await jsonToEnvFile(envFilePath, json, capitalize, parentKey);
+  await jsonToEnvFile(envFilePath, json, options);
 };
