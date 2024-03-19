@@ -10,6 +10,14 @@ const simpleJsonEnvs = [
   },
   {
     json: {
+      project_id: "this-is-a-project-id",
+      project_number: 1234567890,
+    },
+    env: `PROJECT_ID=this-is-a-project-id\nPROJECT_NUMBER=1234567890\n`,
+    envLower: `project_id=this-is-a-project-id\nproject_number=1234567890\n`,
+  },
+  {
+    json: {
       appId: "fake-app-id",
       projectId: "this-is-a-project-id",
     },
@@ -137,6 +145,41 @@ TOKENS_0=abc-token\nTOKENS_1=def-token\nTOKENS_2=ghi-token
 USERS_0_NAME=Uno\nUSERS_0_EMAIL=uno@gmail.com\nUSERS_1_NAME=Dos\nUSERS_1_EMAIL=dos@gmail.com
 SERVICES_DATABASE_LOCATION=PH\nSERVICES_DATABASE_TYPE=SQL
 SERVICES_ANDROID_APP_NAME=android app service\nSERVICES_ANDROID_APP_LANGUAGE=Kotlin\n`,
+  },
+  {
+    json: {
+      quiz: {
+        sport: {
+          q1: {
+            question: "Which one is correct team name in NBA?",
+            options: [
+              "New York Bulls",
+              "Los Angeles Kings",
+              "Golden State Warriros",
+              "Huston Rocket",
+            ],
+            answer: "Huston Rocket",
+          },
+        },
+        maths: {
+          q1: {
+            question: "5 + 7 = ?",
+            options: ["10", "11", "12", "13"],
+            answer: "12",
+          },
+          q2: {
+            question: "12 - 8 = ?",
+            options: ["1", "2", "3", "4"],
+            answer: "4",
+          },
+        },
+      },
+    },
+    env: `QUIZ_SPORT_Q1_QUESTION=Which one is correct team name in NBA?\nQUIZ_SPORT_Q1_OPTIONS_0=New York Bulls
+QUIZ_SPORT_Q1_OPTIONS_1=Los Angeles Kings\nQUIZ_SPORT_Q1_OPTIONS_2=Golden State Warriros\nQUIZ_SPORT_Q1_OPTIONS_3=Huston Rocket
+QUIZ_SPORT_Q1_ANSWER=Huston Rocket\nQUIZ_MATHS_Q1_QUESTION=5 + 7 = ?\nQUIZ_MATHS_Q1_OPTIONS_0=10\nQUIZ_MATHS_Q1_OPTIONS_1=11
+QUIZ_MATHS_Q1_OPTIONS_2=12\nQUIZ_MATHS_Q1_OPTIONS_3=13\nQUIZ_MATHS_Q1_ANSWER=12\nQUIZ_MATHS_Q2_QUESTION=12 - 8 = ?\nQUIZ_MATHS_Q2_OPTIONS_0=1
+QUIZ_MATHS_Q2_OPTIONS_1=2\nQUIZ_MATHS_Q2_OPTIONS_2=3\nQUIZ_MATHS_Q2_OPTIONS_3=4\nQUIZ_MATHS_Q2_ANSWER=4\n`,
   },
 ];
 
