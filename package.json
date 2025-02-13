@@ -2,8 +2,8 @@
   "name": "json-to-env-parser",
   "version": "1.0.2",
   "description": "Parses JSON object to env format",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/amalej/json-to-env-parser"
@@ -15,7 +15,7 @@
     "test:json": "jest --coverage --verbose /tests/jsonToEnv.test.ts"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "keywords": [
     "json",
